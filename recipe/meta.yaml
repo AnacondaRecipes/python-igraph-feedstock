@@ -52,6 +52,8 @@ requirements:
     - mpir  # [win]
     - texttable >=1.6.2
     - python
+    - _openmp_mutex  # [linux]
+    - libopenblas  # [not win]
 
 
 test:
