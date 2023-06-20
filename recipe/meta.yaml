@@ -38,8 +38,7 @@ requirements:
     - arpack 3.9.0  # [not win]
     - gmp  # [not win]
     - mpir  # [win]
-    - libblas
-    - liblapack
+    - openblas {{ openblas }}  # [not win]
     - python
     - pip
     - zlib
@@ -48,6 +47,7 @@ requirements:
     - libxml2
     - suitesparse
     - arpack  # [not win]
+    - openblas {{ openblas }}  # [not win]
     - gmp  # [not win]
     - mpir  # [win]
     - texttable >=1.6.2
