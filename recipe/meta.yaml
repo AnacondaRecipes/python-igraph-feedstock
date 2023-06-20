@@ -47,7 +47,6 @@ requirements:
     - libxml2
     - suitesparse
     - arpack  # [not win]
-    - openblas {{ openblas }}  # [not win]
     - gmp  # [not win]
     - mpir  # [win]
     - texttable >=1.6.2
