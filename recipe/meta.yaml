@@ -29,6 +29,7 @@ requirements:
     - {{ compiler('cxx') }}
     - cmake
     - ninja
+    - llvm-openmp  # [osx]
     - make  # [not win]
     - pkg-config  # [not win]
   host:
@@ -51,6 +52,7 @@ requirements:
     - mpir  # [win]
     - texttable >=1.6.2
     - python
+
 
 test:
   source_files:
