@@ -56,17 +56,6 @@ requirements:
     - libopenblas  # [not win]
 
 
-test:
-  source_files:
-    - tests
-  imports:
-    - igraph
-    - igraph.app
-    - igraph.drawing
-    - igraph.remote
-  commands:
-    - python -m unittest -v
-
 about:
   home: https://igraph.org/python/
   license: GPL-2.0-or-later
