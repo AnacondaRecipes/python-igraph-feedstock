@@ -14,7 +14,7 @@ export IGRAPH_CMAKE_EXTRA_ARGS="
     -DIGRAPH_USE_INTERNAL_BLAS=0 \
     -DIGRAPH_USE_INTERNAL_LAPACK=0 \
     -DIGRAPH_USE_INTERNAL_ARPACK=0 \
-    -DIGRAPH_USE_INTERNAL_GLPK=0 \
+    -DIGRAPH_USE_INTERNAL_GLPK=${INTERNAL_GLPK} \
     -DIGRAPH_USE_INTERNAL_CXSPARSE=0 \
     -DIGRAPH_USE_INTERNAL_GMP=0 \
     -DBUILD_SHARED_LIBS=off \
@@ -24,4 +24,4 @@ export IGRAPH_CMAKE_EXTRA_ARGS="
     -DLAPACK_LIBRARIES=\"${PREFIX}/lib/liblapack${SHLIB_EXT}\"
     "
 
-${PYTHON} -m pip install --no-deps --ignore-installed . -vvv
+${PYTHON} -m pip install --no-deps --ignore-installed --no-build-isolation . -vvv
