@@ -33,7 +33,7 @@ requirements:
     - llvm-openmp  # [osx]
     - make  # [not win]
     - pkg-config  # [not win]
-    - intel-openmp 2023.1.0  # [win
+    - intel-openmp 2023.1.0  # [win]
     - mkl-devel 2023.1.0  # [win]
     - mkl 2023.1.0  # [win]
   host:
