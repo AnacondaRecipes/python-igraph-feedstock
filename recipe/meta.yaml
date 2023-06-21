@@ -26,6 +26,7 @@ build:
 
 requirements:
   build:
+    - cross-python_{{ target_platform }}     # [build_platform != target_platform]
     - libtool  # [unix]
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
@@ -47,6 +48,7 @@ requirements:
     - python
     - pip
     - wheel
+    - setuptools
     - zlib
   run:
     - glpk  # [not (linux and s390x)]
