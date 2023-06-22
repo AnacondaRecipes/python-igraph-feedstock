@@ -56,8 +56,8 @@ test:
   requires:
     - pycairo
     - pip
-  imports:
-    - igraph
+      # imports:
+      #  - igraph
   commands:
     - pip check
       #- if not exist %LIBRARY_LIB%\\igraph.dll exit 1  # [win]
