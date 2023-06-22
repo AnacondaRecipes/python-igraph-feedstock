@@ -21,9 +21,9 @@ build:
     - INTERNAL_GLPK=1  # [linux and s390x]
   run_exports:
     - {{ pin_subpackage("python-igraph", max_pin="x.x") }}
-  missing_dso_whitelist:  # [s390x]
+  missing_dso_whitelist:
     - '$RPATH/ld64.so.1'  # [s390x]
-    - '*/igraph.dll'  # [win]
+    - '$RPATH/igraph.dll'  # [win]
 
 requirements:
   build:
