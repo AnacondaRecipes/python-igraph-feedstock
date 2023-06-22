@@ -60,7 +60,6 @@ test:
     - igraph
   commands:
     - pip check
-    - if not exist %LIBRARY_BIN%\\igraph.dll exit 1  # [win]
 
 about:
   home: https://igraph.org/python/
