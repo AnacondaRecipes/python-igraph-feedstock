@@ -27,9 +27,9 @@ requirements:
     - {{ compiler('cxx') }} 
     - cmake  # [win]
     - ninja  # [win]
-    - pkg-config  
+    - pkg-config # [not win] 
   host:
-    - igraph 0.10.4  
+    - igraph 0.10.4  # [not win] 
     - glpk 4.65  # [win]
     - libxml2  {{ libxml2 }}  # [win]
     - mpir 3.0.0  # [win]
@@ -42,7 +42,7 @@ requirements:
     - setuptools
     - zlib
   run:
-    - igraph
+    - igraph  # [not win]
     - glpk  # [win]
     - libxml2  # [win]
     - mpir  # [win]
@@ -59,7 +59,7 @@ test:
     - igraph
   commands:
     - pip check
-    - if not exist %PREFIX%\\Library\\lib\\igraph.dll exit 1  # [win]
+    - if not exist %LIBRARY_LIB%\\igraph.dll exit 1  # [win]
 
 about:
   home: https://igraph.org/python/
