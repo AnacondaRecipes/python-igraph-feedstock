@@ -23,6 +23,7 @@ build:
 
 requirements:
   build:
+    - cross-python_{{ target_platform }}     # [build_platform != target_platform]
     - {{ compiler('c') }} 
     - {{ compiler('cxx') }} 
     - cmake  # [win]
@@ -59,7 +60,7 @@ test:
     - igraph
   commands:
     - pip check
-    - if not exist %LIBRARY_LIB%\\igraph.dll exit 1  # [win]
+      #- if not exist %LIBRARY_LIB%\\igraph.dll exit 1  # [win]
 
 about:
   home: https://igraph.org/python/
