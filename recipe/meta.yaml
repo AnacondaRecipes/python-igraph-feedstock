@@ -56,7 +56,7 @@ test:
   requires:
     - pycairo
     - pip
-   imports:
+  imports:
     - igraph
   commands:
     - pip check
