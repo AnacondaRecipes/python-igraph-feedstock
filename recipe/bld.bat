@@ -21,3 +21,7 @@ set IGRAPH_EXTRA_LIBRARIES=glpk,libxml2
 
 %PYTHON% -m pip install --no-deps --ignore-installed --no-build-isolation . -vvv
 if errorlevel 1 exit 1
+
+xcopy /s /y %SRC_DIR%\\vendor\\install\\igraph\\lib\ %LIBRARY_LIB%\\
+xcopy /s /y %SRC_DIR%\\vendor\\install\\igraph\\bin\ %LIBRARY_BIN%\\
+xcopy /s /y %SRC_DIR%\\vendor\\install\\igraph\\include\ %LIBRARY_INC%\\

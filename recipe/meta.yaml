@@ -56,15 +56,11 @@ test:
   requires:
     - pycairo
     - pip
-      # imports:
-      #  - igraph
+   imports:
+    - igraph
   commands:
     - pip check
-    - echo "tree SRC_DIR:"  # [win]
-    - tree %SRC_DIR%  # [win]
-    - echo "tree PREFIX:"  # [win]
-    - tree %PREFIX%  # [win]
-    - if not exist %LIBRARY_LIB%\\igraph.dll exit 1  # [win]
+    - if not exist %LIBRARY_BIN%\\igraph.dll exit 1  # [win]
 
 about:
   home: https://igraph.org/python/
