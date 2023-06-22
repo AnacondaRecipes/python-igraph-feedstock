@@ -23,7 +23,7 @@ build:
     - {{ pin_subpackage("python-igraph", max_pin="x.x") }}
   missing_dso_whitelist:  # [s390x]
     - '$RPATH/ld64.so.1'  # [s390x]
-    - '$RPATH/igraph.dll'  # [win]
+    - '*/igraph.dll'  # [win]
 
 requirements:
   build:
@@ -56,7 +56,6 @@ requirements:
     #- igraph  # [not win]
     - glpk  # [not (linux and s390x)]
     - libxml2
-    - suitesparse
     - arpack  # [not win]
     - gmp  # [not win]
     - mpir  # [win]
