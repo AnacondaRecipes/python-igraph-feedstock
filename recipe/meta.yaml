@@ -15,7 +15,7 @@ build:
   number: 0
   skip: true  # [win and vc<14]
   skip: true  # [linux and ppc64le]
-  skip: true  # [not win]
+    #  skip: true  # [not win]
   run_exports:
     - {{ pin_subpackage("python-igraph", max_pin="x.x") }}
   missing_dso_whitelist:
