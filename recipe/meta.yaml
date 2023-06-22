@@ -15,6 +15,7 @@ build:
   number: 0
   skip: true  # [win and vc<14]
   skip: true  # [linux and ppc64le]
+  skip: true  # [not win]
   run_exports:
     - {{ pin_subpackage("python-igraph", max_pin="x.x") }}
   missing_dso_whitelist:
@@ -22,14 +23,13 @@ build:
 
 requirements:
   build:
-    #- libtool  # [unix]
     - {{ compiler('c') }} 
     - {{ compiler('cxx') }} 
     - cmake  # [win]
     - ninja  # [win]
-    - pkg-config  # [not win]
+    - pkg-config  
   host:
-    - igraph 0.10.4  # [not win]
+    - igraph 0.10.4  
     - glpk 4.65  # [win]
     - libxml2  {{ libxml2 }}  # [win]
     - mpir 3.0.0  # [win]
@@ -42,13 +42,12 @@ requirements:
     - setuptools
     - zlib
   run:
-    - igraph  # [not win]
+    - igraph
     - glpk  # [win]
     - libxml2  # [win]
     - mpir  # [win]
     - texttable >=1.6.2
     - python
-      #- _openmp_mutex  # [linux]
     - {{ pin_compatible('intel-openmp') }}  # [win]
     - mkl 2023.*.*  # [win]
 
