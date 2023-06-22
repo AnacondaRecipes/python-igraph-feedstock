@@ -60,7 +60,11 @@ test:
       #  - igraph
   commands:
     - pip check
-      #- if not exist %LIBRARY_LIB%\\igraph.dll exit 1  # [win]
+    - echo "tree SRC_DIR:"  # [win]
+    - tree %SRC_DIR%  # [win]
+    - echo "tree PREFIX:"  # [win]
+    - tree %PREFIX%  # [win]
+    - if not exist %LIBRARY_LIB%\\igraph.dll exit 1  # [win]
 
 about:
   home: https://igraph.org/python/
