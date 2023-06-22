@@ -15,35 +15,29 @@ build:
   skip: true  # [linux and ppc64le]
   number: 0
   skip: true  # [win and vc<14]
-  script_env:
-    - F2C_EXTERNAL_ARITH_HEADER={{ RECIPE_DIR }}/arith_arm64.h  # [arm64]
-    - INTERNAL_GLPK=0  # [not (linux and s390x) and not win]
-    - INTERNAL_GLPK=1  # [linux and s390x]
+    #script_env:
+    #- F2C_EXTERNAL_ARITH_HEADER={{ RECIPE_DIR }}/arith_arm64.h  # [arm64]
   run_exports:
     - {{ pin_subpackage("python-igraph", max_pin="x.x") }}
   missing_dso_whitelist:
-    - '$RPATH/ld64.so.1'  # [s390x]
     - '$RPATH/igraph.dll'  # [win]
 
 requirements:
   build:
-    - cross-python_{{ target_platform }}     # [build_platform != target_platform]
-    - libtool  # [unix]
-    - {{ compiler('c') }}
-    - {{ compiler('cxx') }}
-    - cmake
-    - ninja
-    - make  # [not win]
+    - {{ compiler('c') }}  # [win]
+    - {{ compiler('cxx') }}  # [win]
+    - cmake  # [win]
+    - ninja  # [win]
     - pkg-config  # [not win]
   host:
-    #- igraph 0.10.4  # [not win]
-    - glpk 4.65  # [not (linux and s390x)]
-    - libxml2  {{ libxml2 }}
-    - arpack 3.9.0  # [not win]
-    - gmp 6.2.1  # [not win]
+    - igraph 0.10.4  # [not win]
+    - glpk 4.65  # [win]
+    - libxml2  {{ libxml2 }}  # [win]
+      #- arpack 3.9.0  # [not win]
+      #- gmp 6.2.1  # [not win]
     - mpir 3.0.0  # [win]
-    - openblas {{ openblas }}  # [not win]
-    - llvm-openmp  # [osx]
+      #- openblas {{ openblas }}  # [not win]
+      #- llvm-openmp  # [osx]
     - intel-openmp 2023.1.0  # [win]
     - mkl-devel 2023.1.0  # [win]
     - mkl 2023.1.0  # [win]
@@ -53,18 +47,26 @@ requirements:
     - setuptools
     - zlib
   run:
-    #- igraph  # [not win]
-    - glpk  # [not (linux and s390x)]
-    - libxml2
-    - arpack  # [not win]
-    - gmp  # [not win]
+    - igraph  # [not win]
+    - glpk  # [win]
+    - libxml2  # [win]
+      # - arpack  # [not win]
+      # - gmp  # [not win]
     - mpir  # [win]
     - texttable >=1.6.2
     - python
     - _openmp_mutex  # [linux]
-    - libopenblas  # [not win]
+      #- libopenblas  # [not win]
     - {{ pin_compatible('intel-openmp') }}  # [win]
     - mkl 2023.*.*  # [win]
+
+test:
+  requires:
+    - pycairo
+  imports:
+    - igraph
+  commands:  # [win]
+    - - if not exist %PREFIX%\\Library\\lib\\igraph.dll exit 1  # [win]
 
 about:
   home: https://igraph.org/python/
