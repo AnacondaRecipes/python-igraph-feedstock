@@ -24,6 +24,7 @@ build:
 
 requirements:
   build:
+    - libtool  # [unix]
     - {{ compiler('c') }}  # [win]
     - {{ compiler('cxx') }}  # [win]
     - cmake  # [win]
@@ -63,10 +64,12 @@ requirements:
 test:
   requires:
     - pycairo
+    - pip
   imports:
     - igraph
-  commands:  # [win]
-    - - if not exist %PREFIX%\\Library\\lib\\igraph.dll exit 1  # [win]
+  commands:
+    - pip check
+    - if not exist %PREFIX%\\Library\\lib\\igraph.dll exit 1  # [win]
 
 about:
   home: https://igraph.org/python/
