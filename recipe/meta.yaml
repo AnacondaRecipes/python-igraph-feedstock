@@ -12,11 +12,9 @@ source:
   sha256: 4786e05919ee93f6479fe8ca697d68537edfe47549ed09dfb33bda4daced1fb9
 
 build:
-  skip: true  # [linux and ppc64le]
   number: 0
   skip: true  # [win and vc<14]
-    #script_env:
-    #- F2C_EXTERNAL_ARITH_HEADER={{ RECIPE_DIR }}/arith_arm64.h  # [arm64]
+  skip: true  # [linux and ppc64le]
   run_exports:
     - {{ pin_subpackage("python-igraph", max_pin="x.x") }}
   missing_dso_whitelist:
@@ -24,7 +22,7 @@ build:
 
 requirements:
   build:
-    - libtool  # [unix]
+    #- libtool  # [unix]
     - {{ compiler('c') }} 
     - {{ compiler('cxx') }} 
     - cmake  # [win]
@@ -34,11 +32,7 @@ requirements:
     - igraph 0.10.4  # [not win]
     - glpk 4.65  # [win]
     - libxml2  {{ libxml2 }}  # [win]
-      #- arpack 3.9.0  # [not win]
-      #- gmp 6.2.1  # [not win]
     - mpir 3.0.0  # [win]
-      #- openblas {{ openblas }}  # [not win]
-      #- llvm-openmp  # [osx]
     - intel-openmp 2023.1.0  # [win]
     - mkl-devel 2023.1.0  # [win]
     - mkl 2023.1.0  # [win]
@@ -51,13 +45,10 @@ requirements:
     - igraph  # [not win]
     - glpk  # [win]
     - libxml2  # [win]
-      # - arpack  # [not win]
-      # - gmp  # [not win]
     - mpir  # [win]
     - texttable >=1.6.2
     - python
-    - _openmp_mutex  # [linux]
-      #- libopenblas  # [not win]
+      #- _openmp_mutex  # [linux]
     - {{ pin_compatible('intel-openmp') }}  # [win]
     - mkl 2023.*.*  # [win]
 
