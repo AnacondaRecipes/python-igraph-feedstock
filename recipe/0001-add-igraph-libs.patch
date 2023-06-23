@@ -1,0 +1,33 @@
+diff --git a/setup.py b/setup.py
+index 56f4556..b28fe68 100644
+--- a/setup.py
++++ b/setup.py
+@@ -618,12 +618,13 @@ class BuildConfiguration:
+         vendor_folder = Path("vendor")
+         source_folder = vendor_folder / "source" / "igraph"
+         build_folder = vendor_folder / "build" / "igraph"
+-        install_folder = vendor_folder / "install" / "igraph"
++        # install_folder = vendor_folder / "install" / "igraph"
++        install_folder = vendor_folder / ".." / ".." / "_h_env" / "Library"
+
+-        if install_folder.exists():
+-            # Vendored igraph already compiled and installed, just use it
+-            self.use_vendored_igraph()
+-            return True
++        # if install_folder.exists():
++        #     # Vendored igraph already compiled and installed, just use it
++        #     self.use_vendored_igraph()
++        #     return True
+
+         if (source_folder / "CMakeLists.txt").exists():
+             igraph_builder = IgraphCCoreCMakeBuilder()
+@@ -792,7 +793,8 @@ class BuildConfiguration:
+         the include and library paths and the library names accordingly."""
+         building_on_windows = building_on_windows_msvc()
+
+-        vendor_dir = Path("vendor") / "install" / "igraph"
++        #vendor_dir = Path("vendor") / "install" / "igraph"
++        vendor_dir = Path("vendor") / ".." / ".." / "_h_env" / "Library"
+
+         buildcfg.include_dirs = [str(vendor_dir / "include" / "igraph")]
+         buildcfg.library_dirs = []

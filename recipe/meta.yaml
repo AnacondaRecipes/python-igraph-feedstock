@@ -7,72 +7,78 @@ package:
   version: {{ version }}
 
 source:
-  fn: {{ name }}-{{ version }}.tar.gz
   url: https://pypi.io/packages/source/{{ pypiname[0] }}/{{ pypiname }}/{{ pypiname }}-{{ version }}.tar.gz
   sha256: 4786e05919ee93f6479fe8ca697d68537edfe47549ed09dfb33bda4daced1fb9
+  patches:  # [win]
+    - 0001-add-igraph-libs.patch  # [win]
 
 build:
   number: 0
   skip: true  # [win and vc<14]
-  script_env:
-    - F2C_EXTERNAL_ARITH_HEADER={{ RECIPE_DIR }}/arith_arm64.h  # [arm64]
-
+  # Skipping linux-ppc64le because igraph is not available on this arch.
+  skip: true  # [linux and ppc64le]
   run_exports:
     - {{ pin_subpackage("python-igraph", max_pin="x.x") }}
+  missing_dso_whitelist:
+    - '$RPATH/igraph.dll'  # [win]
 
 requirements:
   build:
-    - python                                 # [build_platform != target_platform]
-    - cross-python_{{ target_platform }}     # [build_platform != target_platform]
-    - libtool  # [unix]
-    - {{ compiler('c') }}
-    - {{ compiler('cxx') }}
-    - cmake
-    - ninja
-    - make  # [not win]
-    - pkg-config  # [not win]
+    - {{ compiler('c') }} 
+    - {{ compiler('cxx') }} 
+    - cmake  # [win]
+    - ninja  # [win]
+    - m2-patch # [win]
+    - pkg-config # [not win] 
   host:
-    - glpk
-    - libxml2
-    - suitesparse
-    - arpack   # [not win]
-    - gmp  # [not win]
-    - mpir  # [win]
-    - libblas
-    - liblapack
+    - igraph 0.10.4  # [not win] 
+    - glpk 4.65  # [win]
+    - libxml2  {{ libxml2 }}  # [win]
+    - mpir 3.0.0  # [win]
+    - intel-openmp 2023.1.0  # [win]
+    - mkl-devel 2023.1.0  # [win]
+    - mkl 2023.1.0  # [win]
     - python
     - pip
+    - wheel
+    - setuptools
     - zlib
   run:
-    - glpk
-    - libxml2
-    - suitesparse
-    - arpack  # [not win]
-    - gmp  # [not win]
+    - igraph  # [not win]
+    - glpk  # [win]
+    - libxml2  # [win]
     - mpir  # [win]
     - texttable >=1.6.2
     - python
+    - {{ pin_compatible('intel-openmp') }}  # [win]
+    - mkl 2023.*.*  # [win]
 
 test:
-  source_files:
-    - tests
+  requires:
+    - pycairo
+    - pip
   imports:
     - igraph
-    - igraph.app
-    - igraph.drawing
-    - igraph.remote
   commands:
-    - python -m unittest -v
+    - pip check
 
 about:
   home: https://igraph.org/python/
   license: GPL-2.0-or-later
+  license_family: GPL
   license_file:
     - LICENSE
     - vendor/source/igraph/ACKNOWLEDGEMENTS.md
-  summary: High performance graph data structures and algorithms
+  summary: |
+    Python interface of igraph, a fast and open source C library to manipulate and analyze
+    graphs (aka networks).
+  description: |
+    Python interface of igraph, a fast and open source C library to manipulate and analyze 
+    graphs (aka networks). It can be used to create, manipulate, and analyze networks,
+    convert graphs from/to networkx, graph-tool and many file formats, plot networks using 
+    Cairo, matplotlib, and plotly.
   dev_url: https://github.com/igraph/python-igraph
-  doc_url: https://igraph.org/python/#docs
+  doc_url: https://python.igraph.org/en/stable/
 
 extra:
   recipe-maintainers:
