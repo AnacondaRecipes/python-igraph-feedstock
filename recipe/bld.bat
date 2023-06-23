@@ -21,14 +21,3 @@ set IGRAPH_EXTRA_LIBRARIES=glpk,libxml2
 
 %PYTHON% -m pip install --no-deps --ignore-installed --no-build-isolation . -vvv
 if errorlevel 1 exit 1
-
-echo "tree CONDA_PREFIX:"
-echo %CONDA_PREFIX%
-tree %CONDA_PREFIX%
-echo "tree SRC_DIR:"
-echo %SRC_DIR%
-tree %SRC_DIR%
-echo "tree PREFIX:"
-echo %PREFIX%
-tree %PREFIX%
-
