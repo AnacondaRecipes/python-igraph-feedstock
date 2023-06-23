@@ -7,15 +7,15 @@ package:
   version: {{ version }}
 
 source:
-  fn: {{ name }}-{{ version }}.tar.gz
   url: https://pypi.io/packages/source/{{ pypiname[0] }}/{{ pypiname }}/{{ pypiname }}-{{ version }}.tar.gz
   sha256: 4786e05919ee93f6479fe8ca697d68537edfe47549ed09dfb33bda4daced1fb9
-  patches:
+  patches:  # [win]
     - 0001-add-igraph-libs.patch  # [win]
 
 build:
   number: 0
   skip: true  # [win and vc<14]
+  # Skipping linux-ppc64le because igraph is not available on this arch.
   skip: true  # [linux and ppc64le]
   run_exports:
     - {{ pin_subpackage("python-igraph", max_pin="x.x") }}
