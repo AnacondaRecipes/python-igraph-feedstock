@@ -52,6 +52,13 @@ requirements:
     - python
     - {{ pin_compatible('intel-openmp') }}  # [win]
     - mkl 2023.*.*  # [win]
+  run_constrained:
+    # cairo
+    - cairocffi >=1.2.0
+    # matplotlib
+    - matplotlib-base >=3.6.0
+    # plotly
+    - plotly >=5.3.0
 
 test:
   requires:
