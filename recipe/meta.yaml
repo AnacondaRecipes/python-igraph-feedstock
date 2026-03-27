@@ -28,7 +28,6 @@ requirements:
     - {{ compiler('cxx') }} 
     - cmake  # [win]
     - ninja  # [win]
-    - m2-patch # [win]
     - pkg-config # [not win] 
   host:
     - igraph 1.0.0  # [not win] 
