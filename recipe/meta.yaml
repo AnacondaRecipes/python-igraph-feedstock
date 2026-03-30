@@ -9,8 +9,8 @@ package:
 source:
   url: https://pypi.io/packages/source/{{ pypiname[0] }}/{{ pypiname }}/{{ pypiname }}-{{ version }}.tar.gz
   sha256: 2414d0be2e4d77ee5357807d100974b40f6082bb1bb71988ec46cfb6728651ee
-  patches:  # [win]
-    - 0001-add-igraph-libs.patch  # [win]
+#  patches:  # [win]
+#    - 0001-add-igraph-libs.patch  # [win]
 
 build:
   number: 0
