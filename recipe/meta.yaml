@@ -26,7 +26,7 @@ requirements:
   build:
     - {{ compiler('c') }} 
     - {{ compiler('cxx') }} 
-    - pkg-config # [not win] 
+    - pkg-config
   host:
     - igraph 1.0.0
     #- glpk 4.65  # [win]
