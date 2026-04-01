@@ -29,13 +29,8 @@ requirements:
     - setuptools
   run:
     - igraph
-    #- glpk  # [win]
-    #- libxml2  # [win]
-    #- mpir  # [win]
     - texttable >=1.6.2
     - python
-    #- {{ pin_compatible('intel-openmp') }}  # [win]
-    #- mkl 2023.*.*  # [win]
   run_constrained:
     # cairo
     - cairocffi >=1.2.0
