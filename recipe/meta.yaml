@@ -15,8 +15,6 @@ source:
 build:
   number: 0
   skip: true  # [py<39 or (win and vc<14)]
-  # Skipping linux-ppc64le because igraph is not available on this arch.
-  skip: true  # [linux and ppc64le]
   run_exports:
     - {{ pin_subpackage("python-igraph", max_pin="x.x") }}
   missing_dso_whitelist:
