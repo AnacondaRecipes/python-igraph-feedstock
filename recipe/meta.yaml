@@ -12,14 +12,14 @@ source:
 
 build:
   number: 0
-  skip: true  # [py<39 or (win and vc<14)]
+  skip: true  # [py<39]
   run_exports:
     - {{ pin_subpackage("python-igraph", max_pin="x.x") }}
 
 requirements:
   build:
-    - {{ compiler('c') }} 
-    - {{ compiler('cxx') }} 
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
     - pkg-config
   host:
     - igraph 1.0.0
