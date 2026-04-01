@@ -15,8 +15,6 @@ build:
   skip: true  # [py<39 or (win and vc<14)]
   run_exports:
     - {{ pin_subpackage("python-igraph", max_pin="x.x") }}
-  #missing_dso_whitelist:
-  #  - '$RPATH/igraph.dll'  # [win]
 
 requirements:
   build:
