@@ -1,6 +1,6 @@
 {% set name = "python-igraph" %}
 {% set pypiname = "igraph" %}
-{% set version = "0.10.4" %}
+{% set version = "1.0.0" %}
 
 package:
   name: {{ name|lower }}
@@ -8,50 +8,36 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ pypiname[0] }}/{{ pypiname }}/{{ pypiname }}-{{ version }}.tar.gz
-  sha256: 4786e05919ee93f6479fe8ca697d68537edfe47549ed09dfb33bda4daced1fb9
-  patches:  # [win]
-    - 0001-add-igraph-libs.patch  # [win]
+  sha256: 2414d0be2e4d77ee5357807d100974b40f6082bb1bb71988ec46cfb6728651ee
 
 build:
   number: 0
-  skip: true  # [win and vc<14]
-  # Skipping linux-ppc64le because igraph is not available on this arch.
-  skip: true  # [linux and ppc64le]
+  skip: true  # [py<39]
   run_exports:
     - {{ pin_subpackage("python-igraph", max_pin="x.x") }}
-  missing_dso_whitelist:
-    - '$RPATH/igraph.dll'  # [win]
 
 requirements:
   build:
-    - {{ compiler('c') }} 
-    - {{ compiler('cxx') }} 
-    - cmake  # [win]
-    - ninja  # [win]
-    - m2-patch # [win]
-    - pkg-config # [not win] 
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - pkg-config
   host:
-    - igraph 0.10.4  # [not win] 
-    - glpk 4.65  # [win]
-    - libxml2  {{ libxml2 }}  # [win]
-    - mpir 3.0.0  # [win]
-    - intel-openmp 2023.1.0  # [win]
-    - mkl-devel 2023.1.0  # [win]
-    - mkl 2023.1.0  # [win]
+    - igraph 1.0.0
     - python
     - pip
     - wheel
     - setuptools
-    - zlib
   run:
-    - igraph  # [not win]
-    - glpk  # [win]
-    - libxml2  # [win]
-    - mpir  # [win]
+    - igraph
     - texttable >=1.6.2
     - python
-    - {{ pin_compatible('intel-openmp') }}  # [win]
-    - mkl 2023.*.*  # [win]
+  run_constrained:
+    # cairo
+    - cairocffi >=1.2.0
+    # matplotlib
+    - matplotlib-base >=3.6.0
+    # plotly
+    - plotly >=5.3.0
 
 test:
   requires:
@@ -63,7 +49,7 @@ test:
     - pip check
 
 about:
-  home: https://igraph.org/python/
+  home: https://igraph.org/python
   license: GPL-2.0-or-later
   license_family: GPL
   license_file:
@@ -78,7 +64,7 @@ about:
     convert graphs from/to networkx, graph-tool and many file formats, plot networks using 
     Cairo, matplotlib, and plotly.
   dev_url: https://github.com/igraph/python-igraph
-  doc_url: https://python.igraph.org/en/stable/
+  doc_url: https://python.igraph.org
 
 extra:
   recipe-maintainers:
